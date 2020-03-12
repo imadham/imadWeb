@@ -3,10 +3,12 @@ package imad.imad.imadWeb.bootstrap;
 import imad.imad.imadWeb.repositories.PublisherRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import imad.imad.imadWeb.model.*;
 import imad.imad.imadWeb.repositories.AuthorRepository;
 import imad.imad.imadWeb.repositories.BookRepository;
 import org.springframework.stereotype.Component;
+import imad.imad.imadWeb.model.Author;
+import imad.imad.imadWeb.model.Publisher;
+import imad.imad.imadWeb.model.Book;
 
 @Component
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
@@ -28,13 +30,14 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
     private void initData(){
 
-        //Eric
-        Publisher publisher = new Publisher("Harper", "11 street");
-
+        Publisher publisher = new Publisher();
+        publisher.setName("foo");
+        publisher.setAddress("12th Street, LA");
         publisherRepository.save(publisher);
 
+        //Eric
         Author eric = new Author("Eric", "Evans");
-        Book  ddd = new Book("Domain Driven Design", "1234",publisher);
+        Book  ddd = new Book("Domain Driven Design", "1234", publisher);
         eric.getBooks().add(ddd);
         ddd.getAuthors().add(eric);
 
@@ -42,15 +45,13 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         bookRepository.save(ddd);
 
 
-
         //Rod
         Author rod = new Author("Rod", "Johnson");
-        Book noEJB = new Book("J2EE Development without EJB", "23444" ,publisher);
+        Book noEJB = new Book("J2EE Development without EJB", "23444", publisher );
         rod.getBooks().add(noEJB);
         noEJB.getAuthors().add(rod);
 
         authorRepository.save(rod);
         bookRepository.save(noEJB);
-
     }
 }

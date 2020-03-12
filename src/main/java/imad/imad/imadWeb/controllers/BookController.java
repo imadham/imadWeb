@@ -1,12 +1,13 @@
-package imad.imad.imadWeb.controller;
+package imad.imad.imadWeb.controllers;
 
-import imad.imad.imadWeb.repositories.BookRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import imad.imad.imadWeb.repositories.BookRepository;
 
 @Controller
 public class BookController {
+
     private BookRepository bookRepository;
 
     public BookController(BookRepository bookRepository) {
@@ -14,8 +15,10 @@ public class BookController {
     }
 
     @RequestMapping("/books")
-    public String getBooks(Model model) {
-    model.addAttribute("Books",bookRepository.findAll());
-    return "books";
+    public String getBooks(Model model){
+
+        model.addAttribute("books", bookRepository.findAll());
+
+        return "books";
     }
 }
